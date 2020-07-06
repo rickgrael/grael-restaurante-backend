@@ -10,7 +10,7 @@ const router = require('./router');
 
 const app = express();
 
-
+app.use(cors())
 
 app.use(fileUpload());
 app.use(bodyParser.json());

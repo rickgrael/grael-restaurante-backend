@@ -103,9 +103,7 @@ function HTMLtoJson(file, res, flag) {
         }
 
     })
-    setTimeout(() => {
-        res.json(arrayResposta)
-    }, 200)
+    res.send('ok')
 
 }
 
