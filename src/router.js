@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const fileControllers = require('./controllers/fileControllers');
+const individualController = require('./controllers/individualController');
+
 const Compras = require('./database/models/Compras');
 const Vendas = require('./database/models/Vendas');
 
@@ -21,8 +23,26 @@ router.post('/api/compras/new/NFCe',fileControllers.getHtmlFile);
 
 router.post('/api/vendas/new/NFCe',fileControllers.getHtmlFile);
 
-router.post('/api/vendas/new/NFe',fileControllers.getXmlFile);
+router.post('/api/vendas/new/NFe',fileControllers.getXmlFile);  
 
+router.post('/api/vendas/new/individual',individualController.individualVenda);
 
+router.post('/api/compras/new/individual',individualController.individualCompra);
+
+router.post('/api/auth', async (req,res)=>{
+    const {
+        user,
+        password
+    } = req.body;
+    console.log(user, password)
+    if( user == 'grael' && password == 'restaurante'){
+        const token = new Date();
+        token.setDate(token.getDate() + 1);
+        res.send(token);
+    }else{
+        res.send("falha")
+    }
+
+})
 
 module.exports = router;
