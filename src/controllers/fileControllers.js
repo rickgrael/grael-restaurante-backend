@@ -51,7 +51,7 @@ function HTMLtoJson(file, res, flag) {
     let [ano, horario] = ano_horario.split(' ');
     let [hora, minuto, segundo] = horario.split(':');
 
-    let formated_date = new Date(ano, mes + 1, dia, hora, minuto, segundo);
+    let formated_date = new Date(ano, mes - 1, dia, hora, minuto, segundo);
     let tabela = root.querySelectorAll('tr')
     let tabelaArray = Array.from(tabela);
 
