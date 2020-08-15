@@ -71,4 +71,30 @@ router.post('/editar/venda', async (req, res) => {
     res.redirect('https://grael-restaurante-caixa.herokuapp.com/entradas')
 })
 
+router.post('/editar/compra', async (req, res) => {
+    const {
+        id,
+        nomeProduto: nome_produto,
+        quantidade,
+        valorUnidade: valor_unitario,
+        valorTotal: valor_total,
+        dataEmissao: data_emissao
+    } = req.body;
+
+    await Compras.update({
+        id,
+        nome_produto,
+        quantidade,
+        valor_unitario,
+        valor_total,
+        data_emissao
+    }, {
+        where: {
+            id
+        }
+    })
+
+    res.redirect('https://grael-restaurante-caixa.herokuapp.com/saidas')
+})
+
 module.exports = router;
