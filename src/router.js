@@ -68,7 +68,7 @@ router.post('/editar/venda', async (req, res) => {
         }
     })
 
-    res.redirect('https://grael-restaurane-backend.herokuapp.com/entradas')
+    res.redirect('https://grael-restaurante-caixa.herokuapp.com/entradas')
 })
 
 module.exports = router;
