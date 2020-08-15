@@ -68,7 +68,7 @@ router.post('/editar/venda', async (req, res) => {
         }
     })
 
-    res.redirect('http://localhost:3000/entradas')
+    res.redirect('https://grael-restaurane-backend.herokuapp.com/entradas')
 })
 
 module.exports = router;
