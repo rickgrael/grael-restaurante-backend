@@ -100,7 +100,7 @@ router.post('/editar/compra', async (req, res) => {
 router.delete('/delete/compra/:id', async (req,res) => {
     const {id} = req.params;
     try{
-        await Compras.delete({
+        await Compras.destroy({
             where:{
                 id
             }
@@ -114,15 +114,18 @@ router.delete('/delete/compra/:id', async (req,res) => {
 
 router.delete('/delete/venda/:id', async (req,res) => {
     const {id} = req.params;
+    console.log(id)
     try{
-        await Vendas.delete({
+        await Vendas.destroy({
             where:{
                 id
             }
         })
+        console.log("excluido")
         res.send("Registro excluidos")
     }catch(e){
-        res.send('erro ao excluir dados')
+        console.log(e)
+        res.send(e)
     }
 })
 
