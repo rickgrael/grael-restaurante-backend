@@ -97,4 +97,33 @@ router.post('/editar/compra', async (req, res) => {
     res.redirect('https://grael-restaurante-caixa.herokuapp.com/saidas')
 })
 
+router.delete('/delete/compra/:id', async (req,res) => {
+    const {id} = req.params;
+    try{
+        await Compras.delete({
+            where:{
+                id
+            }
+        })
+        res.send("Registro excluidos")
+    }catch(e){
+        res.send('erro ao excluir dados')
+    }
+
+})
+
+router.delete('/delete/venda/:id', async (req,res) => {
+    const {id} = req.params;
+    try{
+        await Vendas.delete({
+            where:{
+                id
+            }
+        })
+        res.send("Registro excluidos")
+    }catch(e){
+        res.send('erro ao excluir dados')
+    }
+})
+
 module.exports = router;
