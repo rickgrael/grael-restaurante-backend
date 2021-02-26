@@ -12,7 +12,6 @@ class individualController {
                 produto_data
             } = req.body;
 
-
             await Vendas.create({
                 data_emissao: produto_data,
                 nome_vendedor: "consumidor",

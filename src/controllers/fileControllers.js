@@ -18,7 +18,7 @@ class fileControllers {
         file = req.files.html;
 
         HTMLtoJson(file.data, res, flag)
-
+        
     }
 
     async getXmlFile(req, res) {

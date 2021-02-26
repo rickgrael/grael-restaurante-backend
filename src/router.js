@@ -1,8 +1,11 @@
+const { Router } = require('express');
 const express = require('express');
 const router = express.Router();
 
 const fileControllers = require('./controllers/fileControllers');
 const individualController = require('./controllers/individualController');
+const produtosController = require('./controllers/produtosController');
+const xlsController = require('./controllers/xlsControllers');
 
 const Compras = require('./database/models/Compras');
 const Vendas = require('./database/models/Vendas');
@@ -114,19 +117,24 @@ router.delete('/delete/compra/:id', async (req,res) => {
 
 router.delete('/delete/venda/:id', async (req,res) => {
     const {id} = req.params;
-    console.log(id)
     try{
         await Vendas.destroy({
             where:{
                 id
             }
         })
-        console.log("excluido")
         res.send("Registro excluidos")
     }catch(e){
-        console.log(e)
         res.send(e)
     }
 })
+
+
+router.post('/produtos', produtosController.create)
+router.get('/produtos', produtosController.index)
+router.post('/produto_edit', produtosController.edit)
+router.delete('/produtos/:id', produtosController.delete)
+
+router.post('/excel_to_json', xlsController.transform)
 
 module.exports = router;
