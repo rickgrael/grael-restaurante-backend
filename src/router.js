@@ -1,5 +1,5 @@
-const { Router } = require('express');
 const express = require('express');
+const sequelize = require('sequelize');
 const router = express.Router();
 
 const fileControllers = require('./controllers/fileControllers');
@@ -113,6 +113,22 @@ router.delete('/delete/compra/:id', async (req,res) => {
         res.send('erro ao excluir dados')
     }
 
+})
+
+router.get('/delete/venda/:from', async (req,res) => {
+    const fromId = req.params.from;
+    try{
+        const deleteds = await Vendas.destroy({
+            where:{
+                id:{
+                    [sequelize.Op.gte]: Number(fromId)
+                }
+            }
+        })
+        res.send(deleteds+ " Registros excluidos")
+    }catch(e){
+        res.send(e)
+    }
 })
 
 router.delete('/delete/venda/:id', async (req,res) => {

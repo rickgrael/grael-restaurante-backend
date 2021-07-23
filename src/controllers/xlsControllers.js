@@ -12,7 +12,7 @@ class XlsController {
         const result = excelToJson({
             source: req.files.xlsx.data
         })
-        const values = result.Sheet1.map((linha) => {
+        const values = result.Página1.map((linha) => {
             return {
                 nome_produto: linha.A,
                 nome_vendedor: "consumidor",
@@ -23,7 +23,14 @@ class XlsController {
             }
         })
         values.shift();
-        await insertToVendas(values);
+        const filteredValues = values.filter(p => {
+            if(p.nome_produto != null){
+                return p;
+            }
+        })
+        console.log(filteredValues)
+
+        // await insertToVendas(values);
         return res.redirect('https://grael-restaurane-backend.herokuapp.com/entradas')
     }
 }
@@ -36,19 +43,5 @@ async function insertToVendas(dados) {
         return error;
     }
 }
-// async function deleteWhatIWant() {
-//     try {
-//         await Vendas.destroy({
-//             where: {
-//                 id: {
-//                     [Op.gte]: 30151
-//                 }
-//             }
-//         });
-//         return true
-//     } catch (error) {
-//         return error;
-//     }
-// }
 
 module.exports = new XlsController()
